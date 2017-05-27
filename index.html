@@ -3,7 +3,7 @@
     <head>
         <meta charset="utf-8">
         <meta http-equiv="x-ua-compatible" content="ie=edge">
-        <title></title>
+        <title>Github repositories search engine</title>
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -14,7 +14,6 @@
         <link rel="stylesheet" href="css/styles.css">
 
         <script src="js/script.js"></script>
-        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body onload="fadeIn(); getRepositories();  ">
         <!--[if lte IE 9]>
@@ -33,22 +32,16 @@
             </p>
             <button type="button" id="theJoker" onclick="getJoke();">Click Me!</button>
           </section>
+          
           <section class="repositories">
+            <form class="searchInterface">
+              <input type="text" class="search"/>
+            </form>
+            <button onclick="getRepositories()" class="button">Search Repositories</button>
             <ul class="list">
             </ul>
           </section>
         </div>
 
-        <script src="https://code.jquery.com/jquery-{{JQUERY_VERSION}}.min.js" integrity="{{JQUERY_SRI_HASH}}" crossorigin="anonymous"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-{{JQUERY_VERSION}}.min.js"><\/script>')</script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
-
-        <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-        <script>
-            window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
-            ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
-        </script>
-        <script src="https://www.google-analytics.com/analytics.js" async defer></script>
     </body>
 </html>

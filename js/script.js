@@ -34,6 +34,11 @@ function getJoke(){
 function getRepositories(){
   let list = document.querySelector(".list");
   let xhttp = new XMLHttpRequest();
+  let repo = (document.querySelector(".search")).value;
+  let url = "https://api.github.com/search/repositories?q=" + repo;
+
+  console.log(repo);
+  console.log(url);
 
   xhttp.onreadystatechange = function(){
     if(xhttp.readyState === xhttp.DONE && this.status == 200){
@@ -46,6 +51,6 @@ function getRepositories(){
     }
   };
 
-  xhttp.open("GET","https://api.github.com/search/repositories?q=%27JavaScript%27",true);
+  xhttp.open("GET",url,true);
   xhttp.send();
 }
