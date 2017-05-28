@@ -43,14 +43,61 @@ function getRepositories(){
   xhttp.onreadystatechange = function(){
     if(xhttp.readyState === xhttp.DONE && this.status == 200){
       let repositories = JSON.parse(xhttp.responseText);
-      for (i=0; i<repositories.items.length; i++){
+      for (let i=0; i < repositories.items.length; i++){
         let li = document.createElement("li");
         li.appendChild(document.createTextNode((repositories.items[i]).full_name));
         list.appendChild(li);
       }
     }
-  };
+  }
 
   xhttp.open("GET",url,true);
   xhttp.send();
+}
+
+
+function makePromise(url){
+	return new Promise( function(resolve, reject) {
+		let xhttp = new XMLHttpRequest();
+
+		xhttp.open("GET", url);
+
+		xhttp.onload = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				let obj = JSON.parse(xhttp.responseText);
+				resolve(console.log(obj));
+			} else {
+				document.querySelector("section").style.backgroundColor="red";
+				reject(Error(xhttp.statusText));
+			}
+		}
+
+		xhttp.send();
+	});
+}
+
+function tableCreator(matrix){
+  let body = document.querySelector(".container");
+  let table = document.createElement("table");
+
+  console.log(matrix);
+
+  for(let i=0; i < matrix.length; i++){
+    let row = document.createElement("tr");
+    console.log(matrix[i]);
+
+    for(let j=0; j < matrix[i].length; j++){
+      console.log(matrix[i][j]);
+      let cell = document.createElement("td");
+      let text = document.createTextNode(matrix[i][j]);
+
+      cell.appendChild(text);
+      row.appendChild(cell);
+    }
+
+    table.appendChild(row);
+  }
+
+  body.appendChild(table);
+
 }

@@ -12,6 +12,7 @@
 }
 
 .hiddenSection {
+  display: inline-block;
   opacity: 0;
 }
 
@@ -24,8 +25,10 @@
 }
 
 .repositories {
+  display: inline-block;
   float: left;
   width: 20%;
+  margin: auto;
 }
 
 .container {
@@ -33,7 +36,19 @@
   margin: auto;
 }
 
+table {
+  display: inline-block;
+  float: left;
+  width: 50%;
+  margin: auto;
+}
+
 form {
   margin-top: 20px;
   margin-bottom: 5px;
+  margin-right: 10px;
+}
+
+input {
+  width: 100%;
 }
