@@ -53,6 +53,8 @@ function getRepositories(){
 
   xhttp.open("GET",url,true);
   xhttp.send();
+
+  return false;
 }
 
 
