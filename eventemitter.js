@@ -11,7 +11,7 @@ class EventEmitter {
 
   emit(event){
     let response = this.callbacks[event]
-    if (response === undefined){
+    if (!response){
       console.log("Event undefined, can't be handle");
     }
     else {
@@ -21,7 +21,7 @@ class EventEmitter {
 
   off(event){
     let response = this.callbacks[event]
-    if (response === undefined){
+    if (!response){
       console.log("Event undefined, can't delete it");
     }
     else {
