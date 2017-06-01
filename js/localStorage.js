@@ -15,6 +15,7 @@ function openDataBase(){
     }
     else {
       showedKeys = 1;
+      listEntries();
     }
   }
   else {
@@ -28,15 +29,15 @@ function addTextFromPage() {
   let textArea = document.querySelector(".textEntry");
   key = localStorage.getItem('KeyCount');
 
-  let obj = new Text(textArea.value);
+  let text = textArea.value;
 
   console.log("Insertion in DB successful");
   let li = document.createElement("li");
 
-  localStorage.setItem(key.toString(),obj);
-  localStorage.setItem('KeyCount',key+1);
+  localStorage.setItem(key,text);
+  localStorage.setItem('KeyCount',parseInt(key)+1);
 
-  li.appendChild(document.createTextNode(showedKeys + " Text - Text Preview   \"" + obj.text.slice(0,8) + "...\""));
+  li.appendChild(document.createTextNode(showedKeys + " Text - Text Preview   \"" + text.slice(0,8) + "...\""));
   list.appendChild(li);
   showedKeys = showedKeys+1;
 
@@ -48,13 +49,11 @@ function addTextFromFile(text) {
   let list = document.querySelector(".textList");
   key = localStorage.getItem('KeyCount');
 
-  let obj = new Text(text);
-
   console.log("Insertion in DB successful");
   let li = document.createElement("li");
 
-  localStorage.setItem(key.toString(),obj);
-  localStorage.setItem('KeyCount',key+1);
+  localStorage.setItem(key,text);
+  localStorage.setItem('KeyCount',parseInt(key)+1);
 
   li.appendChild(document.createTextNode(showedKeys + " Text - Text Preview   \"" + obj.text.slice(0,8) + "...\""));
   list.appendChild(li);
@@ -63,20 +62,16 @@ function addTextFromFile(text) {
 }
 
 function listEntries(){
-  let objectStore = db.transaction(DB_STORE_NAME,'readonly').objectStore(DB_STORE_NAME);
   let list = document.querySelector(".textList");
+  key =  localStorage.getItem('KeyCount');
 
-  objectStore.openCursor().onsuccess = function(event) {
-  let cursor = event.target.result;
+  for(let i=1; i<parseInt(key); i++){
+    let li = document.createElement("li");
+    let text = localStorage.getItem(i.toString());
 
-  if (cursor) {
-      console.log(showedKeys);
-      let li = document.createElement("li");
-      li.appendChild(document.createTextNode(showedKeys + " Text - Text Preview   \"" + cursor.value.text.slice(0,8) + "...\""));
-      list.appendChild(li);
-      showedKeys=showedKeys+1
-      cursor.continue();
-    }
+    li.appendChild(document.createTextNode(showedKeys + " Text - Text Preview   \"" + text.slice(0,8) + "...\""));
+    list.appendChild(li);
+    showedKeys=showedKeys+1;
   }
 };
 
