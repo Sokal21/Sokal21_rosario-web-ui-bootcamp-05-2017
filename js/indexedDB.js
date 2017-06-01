@@ -105,7 +105,7 @@ function emptyList(){
   }
 }
 
-function deleteEntries(text){
+function deleteEntries(){
   let objectStore = db.transaction(DB_STORE_NAME,'readonly').objectStore(DB_STORE_NAME);
 
   objectStore.openCursor().onsuccess = function(event) {
@@ -147,6 +147,5 @@ function fileLoader(event){
 }
 
 function allowDrop(event){
-  console.log("Esta funcando");
   event.preventDefault();
 }
