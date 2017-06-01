@@ -14,8 +14,10 @@
         <link rel="stylesheet" href="css/normalize.css">
         <link rel="stylesheet" href="css/style.css">
         <script src="js/localStorage.js"></script>
+        <script src="js/socket.js"></script>
+        <script src="js/animation.js"></script>
     </head>
-    <body onload="openDataBase()">
+    <body onload="openDataBase();init()">
         <!--[if lte IE 9]>
             <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
         <![endif]-->
@@ -41,6 +43,20 @@ Write something, this text will be saved!
         <p> Drop your text files here</p>
       </div>
 
-
+      <div class="echoTest">
+        <form>
+          <textarea name="message" rows="1" cols="20" class="echoMessage"></textarea>
+          <button type="button" value="send" class="sendButton" onclick="sendMessage()">Send</button>
+        </form>
+        <p>Send messages to test echo server, see in the console the result</p>
+      </div>
+      <div class="clear">
+      </div>
+      <canvas class="myCanvas">
+      </canvas>
+      <svg width="400" height="180">
+        <rect x="50" y="20" rx="20" ry="20" width="200" height="60"
+        style="fill:#4286f4;stroke:#122c56;stroke-width:7;" />
+      </svg>
     </body>
 </html>
