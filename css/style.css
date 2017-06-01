@@ -1,0 +1,32 @@
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.userText {
+  float: left;
+  margin: 25px;
+}
+
+.textEntry {
+  width: 100%;
+}
+
+.saveButton {
+  margin-top: 10px auto 10px;
+}
+
+.clear {
+  clear:both;
+}
+
+.dropText {
+  width: 200px;
+  height: 100px;
+  border: 5px dashed #ccc;
+}
+
+.dropText:hover {
+  border: 5px dashed #333;
+}
