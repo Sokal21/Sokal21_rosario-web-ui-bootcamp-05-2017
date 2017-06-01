@@ -15,8 +15,8 @@ header {
 
 body > header {
   max-width: auto;
-  margin: 10px 10px 10px 10px;
-  padding: 5px 5px 5px 5px;
+  margin: 10px;
+  padding: 5px;
   background-color: #2065D6;
 }
 
