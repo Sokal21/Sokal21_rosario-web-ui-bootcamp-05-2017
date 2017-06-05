@@ -12,13 +12,11 @@ function openDataBase(){
     if(!localStorage.getItem('KeyCount')){
       localStorage.setItem('KeyCount',1);
       showedKeys = 1;
-    }
-    else {
+    } else {
       showedKeys = 1;
       listEntries();
     }
-  }
-  else {
+  } else {
     alert("Sorry, this web page dosen't suport Web Sotrage");
   }
 };
