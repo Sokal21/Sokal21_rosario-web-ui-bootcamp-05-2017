@@ -1,0 +1,54 @@
+* {
+  -webkit-box-sizing: border-box;
+     -moz-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.userText {
+  float: left;
+  margin: 25px;
+}
+
+.textEntry {
+  width: 100%;
+}
+
+.saveButton {
+  margin-top: 10px auto 10px;
+}
+
+.clear {
+  clear:both;
+}
+
+.dropText {
+  width: 200px;
+  height: 100px;
+  border: 5px dashed #ccc;
+}
+
+.dropText:hover {
+  border: 5px dashed #333;
+}
+
+.echoTest {
+  float: left;
+  margin: 25px;
+}
+
+.echoMessage {
+  width: 100%;
+}
+
+.sendButton {
+  margin-top: 10px auto 10px;
+}
+
+.myCanvas {
+  max-width: 500px;
+  width: 80%;
+  height: 400px;
+  border:1px solid #000000;
+  margin: 25px;
+  float: left;
+}
