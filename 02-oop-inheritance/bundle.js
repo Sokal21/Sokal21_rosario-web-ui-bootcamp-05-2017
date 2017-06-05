@@ -37,7 +37,7 @@ var EventEmitter = function () {
     key: "emit",
     value: function emit(event) {
       var response = this.callbacks[event];
-      if (response === undefined) {
+      if (response) {
         console.log("Event undefined, can't be handle");
       } else {
         response(this);
@@ -47,7 +47,7 @@ var EventEmitter = function () {
     key: "off",
     value: function off(event) {
       var response = this.callbacks[event];
-      if (response === undefined) {
+      if (response) {
         console.log("Event undefined, can't delete it");
       } else {
         delete this.callbacks[event];

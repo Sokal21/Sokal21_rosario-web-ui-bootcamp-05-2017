@@ -13,8 +13,7 @@ class EventEmitter {
     let response = this.callbacks[event]
     if (!response){
       console.log("Event undefined, can't be handle");
-    }
-    else {
+    } else {
       response(this);
     }
   }
@@ -23,8 +22,7 @@ class EventEmitter {
     let response = this.callbacks[event]
     if (!response){
       console.log("Event undefined, can't delete it");
-    }
-    else {
+    }   else {
       delete this.callbacks[event];
     }
   }
