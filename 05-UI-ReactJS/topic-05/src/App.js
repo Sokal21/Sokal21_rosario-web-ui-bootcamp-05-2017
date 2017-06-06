@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 
-const DB_STORE_NAME = "textDataBase";
-let db;
+let movieKey = 0;
 
 class Actor {
   constructor(name,age,key){
@@ -13,11 +12,13 @@ class Actor {
 };
 
 class Movie {
-  constructor(title,year,duration){
+  constructor(title,year,duration,key){
     this.title = title;
     this.year = year;
     this.duration = duration;
     this.cast = []
+    this.key = key
+    this.favourite = false;
   }
 
   addCast(actor){
@@ -29,6 +30,10 @@ class Movie {
     else {
       this.cast.push(actor);
     }
+  }
+
+  makeFav(){
+    this.favourite = true;
   }
 };
 
@@ -130,9 +135,7 @@ class ListActors extends Component {
         {
           this.props.list.map(function (listValue){
             return (
-              <div className = "Actor">
                 <ActorElement keyActor = {listValue.key} value = {listValue.name} handleDelete = {obj.props.deleteActor} />
-              </div>
               )
             }
           )
@@ -142,16 +145,86 @@ class ListActors extends Component {
   }
 };
 
+class MovieElement extends Component {
+
+  constructor(props){
+    super(props);
+    this.state = {added: false};
+    this.fav = this.fav.bind(this);
+  }
+
+  fav(event){
+    if(!this.state.added){
+      event.preventDefault();
+      this.setState({added: true});
+      this.props.movie.makeFav();
+      this.props.handleFav();
+    } else {
+      console.log("Already Added");
+    }
+  }
+
+  render(){
+    return(
+      <li>
+        {this.props.movie.title}
+        <button onClick = {this.fav}>Fav</button>
+      </li>
+    )
+  }
+}
+
+class MovieList extends Component {
+
+  render(){
+    let movies = this.props.movies;
+    let obj = this;
+    return (
+      <ul>
+        {
+          movies.map(function (listValue){
+            return (
+                <MovieElement movie = {listValue} handleFav = {obj.props.handleFav}/>
+              )
+            }
+          )
+        }
+      </ul>
+    )
+  }
+}
+
+class ListElements extends Component {
+
+  render(){
+    let favouritesMovies = this.props.list;
+    console.log(this.props.list);
+    return (
+    <ul>
+      {
+        favouritesMovies.map(function (listValue){
+          return (
+            <li>{listValue.title}</li>
+          )
+        })
+      }
+    </ul>
+    )
+  }
+}
+
 class MovieUI extends Component {
   constructor(props) {
     super(props);
-    this.state = {actors: [],key: 0};
+    this.state = {actors: [],key: 0, movies: []};
     this.handleMovieTitle = this.handleMovieTitle.bind(this);
     this.handleMovieYear = this.handleMovieYear.bind(this);
     this.handleMovieDuration = this.handleMovieDuration.bind(this);
     this.newActorRegistered = this.newActorRegistered.bind(this);
     this.newMovieRegistered = this.newMovieRegistered.bind(this);
     this.deleteActor = this.deleteActor.bind(this);
+    this.handleFav = this.handleFav.bind(this);
+
   }
 
   handleMovieTitle(t){
@@ -185,18 +258,28 @@ class MovieUI extends Component {
     this.setState({key: newKey})
   }
 
+  handleFav(){
+    this.forceUpdate();
+  }
+
+  addMovie(movie){
+    let movies = this.state.movies;
+    movies.push(movie);
+    this.setState({movies: movies});
+  }
+
   newMovieRegistered(event) {
-    let movie = new Movie(this.state.title,this.state.year,this.state.duration);
+    event.preventDefault()
+
+    let movie = new Movie(this.state.title,this.state.year,this.state.duration,movieKey);
+    movieKey = movieKey + 1;
     movie.addCast(this.state.actors);
-    addMovie(movie);
+    this.addMovie(movie);
     this.setState({actors: []});
     this.setState({key: 0});
-    console.log(movie);
-    event.preventDefault();
   }
 
   render() {
-    openDataBase();
     return(
       <div className="UserUI">
         <form className = "MovieRegiterUI" onSubmit = {this.newMovieRegistered}>
@@ -214,63 +297,18 @@ class MovieUI extends Component {
           <p><strong>Added actors</strong></p>
           <ListActors list = {this.state.actors} deleteActor = {this.deleteActor}/>
         </div>
+        <div className = "MovieList">
+          <p><strong>Movies that has been created</strong></p>
+          <MovieList movies = {this.state.movies} handleFav = {this.handleFav}/>
+        </div>
+        <div>
+          <p><strong>Your favourites movies!</strong></p>
+          <ListElements list = {this.state.movies.filter(function (mv){return mv.favourite})}/>
+        </div>
+
       </div>
     )
   }
 }
-
-function openDataBase(){
-
-  let request = indexedDB.open(DB_STORE_NAME, 1);
-
-  request.onerror = function(event){
-    console.log(event);
-    alert("There has been an error in indexedDB, error code: " + event.target.errorCode);
-  };
-
-  request.onsuccess = function (event) {
-    db = this.result;
-    console.log("openDb DONE");
-  };
-
-  request.onupgradeneeded = function (event) {
-      let store = event.currentTarget.result.createObjectStore(DB_STORE_NAME, { autoIncrement: true });
-  }
-};
-
-function addMovie(movie) {
-
-  let store = db.transaction(DB_STORE_NAME, 'readwrite').objectStore(DB_STORE_NAME);
-  let req = store.add(movie);
-
-  req.onsuccess = function (event) {
-    console.log("Insertion in DB successful");
-  };
-
-  req.onerror = function() {
-    alert("There has been an error in indexedDB, error code: " + this.error);
-  }
-}
-
-function deleteEntries(){
-  let objectStore = db.transaction(DB_STORE_NAME,'readonly').objectStore(DB_STORE_NAME);
-
-  objectStore.openCursor().onsuccess = function(event) {
-    let cursor = event.target.result;
-    if (cursor) {
-      let request = db.transaction(DB_STORE_NAME, "readwrite").objectStore(DB_STORE_NAME)
-                .delete(cursor.key);
-
-      request.onerror = function(event) {
-        alert("There has been an error while trying to delete an entrie " + event.target.errorCode);
-      };
-      request.onsuccess = function(event) {
-        console.log("An item has been deleted");
-      };
-      cursor.continue();
-    }
-  }
-};
-
 
 export default MovieUI;
