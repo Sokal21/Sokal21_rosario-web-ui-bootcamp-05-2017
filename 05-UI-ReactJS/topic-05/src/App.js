@@ -151,6 +151,7 @@ class MovieElement extends Component {
     super(props);
     this.state = {added: false};
     this.fav = this.fav.bind(this);
+    this.deleteMovie = this.deleteMovie.bind(this)
   }
 
   fav(event){
@@ -164,11 +165,17 @@ class MovieElement extends Component {
     }
   }
 
+  deleteMovie(event){
+    event.preventDefault;
+    this.props.handleDelete(this.props.movie.key);
+  }
+
   render(){
     return(
       <li>
         {this.props.movie.title}
         <button onClick = {this.fav}>Fav</button>
+        <button onClick = {this.deleteMovie}>Delete</button>
       </li>
     )
   }
@@ -184,7 +191,7 @@ class MovieList extends Component {
         {
           movies.map(function (listValue){
             return (
-                <MovieElement movie = {listValue} handleFav = {obj.props.handleFav}/>
+                <MovieElement movie = {listValue} handleFav = {obj.props.handleFav} handleDelete = {obj.props.handleDelete}/>
               )
             }
           )
@@ -224,6 +231,8 @@ class MovieUI extends Component {
     this.newMovieRegistered = this.newMovieRegistered.bind(this);
     this.deleteActor = this.deleteActor.bind(this);
     this.handleFav = this.handleFav.bind(this);
+    this.handleDelete = this.handleDelete.bind(this);
+
 
   }
 
@@ -262,10 +271,18 @@ class MovieUI extends Component {
     this.forceUpdate();
   }
 
+  handleDelete(movieKey){
+    for(let a in this.state.movies){
+      if(this.state.movies[a].key === movieKey){
+        this.state.movies.splice(a,1);
+        break;
+      }
+    }
+    this.forceUpdate();
+  }
+
   addMovie(movie){
-    let movies = this.state.movies;
-    movies.push(movie);
-    this.setState({movies: movies});
+    this.state.movies.push(movie);
   }
 
   newMovieRegistered(event) {
@@ -299,7 +316,7 @@ class MovieUI extends Component {
         </div>
         <div className = "MovieList">
           <p><strong>Movies that has been created</strong></p>
-          <MovieList movies = {this.state.movies} handleFav = {this.handleFav}/>
+          <MovieList movies = {this.state.movies} handleFav = {this.handleFav} handleDelete = {this.handleDelete}/>
         </div>
         <div>
           <p><strong>Your favourites movies!</strong></p>
