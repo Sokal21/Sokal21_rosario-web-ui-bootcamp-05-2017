@@ -1,0 +1,151 @@
+html {
+  font-size: 14px;
+  font-family: 'Roboto Slab', serif;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.text {
+  text-align: left;
+}
+
+.container {
+  margin: 0 auto;
+  width: 90%;
+}
+
+.clearfix:before,
+.clearfix:after {
+  content: " ";
+  display: table;
+}
+
+.clearfix:after {
+  clear: both;
+}
+
+.clearfix {
+  *zoom: 1;
+}
+
+@media (min-width: 40rem) {
+  .column {
+    float: left;
+  }
+
+  .column.third{
+    width: 33.3%;
+  }
+
+  .column.two-thirds{
+    width: 46.7%;
+  }
+
+  .column.green{
+    background-color: green;
+  }
+
+  .column.blue{
+    background-color: blue;
+  }
+
+}
+
+.banner{
+  margin-top: 20px;
+  margin-left: 50px;
+  margin-bottom: 70px;
+}
+
+*, *:before, *:after {
+ padding: 0;
+ margin: 0;
+}
+
+.gallery-grid {
+	clear: both;
+  display: block;
+  float: left;
+  width: 100%;
+  padding: 8px;
+}
+.gallery-grid.columns {
+	margin-right: 0;
+}
+.one-third {
+  box-shadow: 0 0 2px 0 rgba(0, 0, 0, 0.3);
+  width: -ms-calc(33.3333% - 16px);
+  width: -moz-calc(33.3333% - 16px);
+  width: -webkit-calc(33.3333% - 16px);
+  width: calc(33.3333% - 16px);
+  margin: 8px;
+  height: auto;
+  position: relative;
+  float: left;
+}
+.one-third:last-of-type {
+  margin-right: 0;
+}
+.gallery-grid img {
+  width: 100%;
+  height: auto;
+  position: relative;
+  float: left;
+}
+.gallery-grid a {
+  display: block;
+}
+.screen {
+	background-color: rgba(255,255,255,0.75);
+	left: 0;
+	top: 0;
+	border-radius: 0;
+	height: 25%;
+	width: 100%;
+	position: absolute;
+	opacity: 0;
+	z-index: 1000;
+  -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+          transition: all 0.3s ease-in-out;
+}
+.screen:hover {
+  opacity: 1
+}
+.title {
+  color: #fff;
+  font-family: arial, helvetica, sans-serif;
+  font-weight: bold;
+  -webkit-transition: all 0.3s ease-in-out;
+    -moz-transition: all 0.3s ease-in-out;
+      -o-transition: all 0.3s ease-in-out;
+        -ms-transition: all 0.3s ease-in-out;
+          transition: all 0.3s ease-in-out;
+  margin-left: -30px;
+}
+.screen:hover .title {
+  margin-left: 0;
+}
+.text-gallery {
+  font-size: 16px;
+  color: black;
+  padding: 5%;
+}
+.screen.fade-in .title {
+  margin-left: 0;
+}
+.screen.fade-in:hover {
+}
+.cta {
+	clear: both;
+	font-weight: bold;
+	font-family: arial,helvetica, sans-serif;
+	display: block;
+	font-size: 2em;
+}
