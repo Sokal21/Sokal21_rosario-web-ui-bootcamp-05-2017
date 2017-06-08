@@ -58,8 +58,8 @@ class MovieInput extends Component {
   render() {
     return(
       <div className="MovieInput">
+        <p className = "MovieInputTitle"><strong>{this.props.header}</strong></p>
         <form className = "MovieRegiterUI" onSubmit = {this.newMovieRegistered}>
-          <p><strong>{this.props.header}</strong></p>
           <InputRowUI title = "Title:" class = "MovieTitleUI" type = "text" placeholder = "Movie title..."
           onInputChange = {this.handleMovieTitle} required = {this.props.required} />
           <InputRowUI title = "Year:" class = "MovieYearUI" type = "number" placeholder = "Movie year..."
@@ -67,7 +67,7 @@ class MovieInput extends Component {
           <InputRowUI title = "Duration:" class = "MovieDurationUI" type = "number" placeholder = "Movie duration..."
           onInputChange = {this.handleMovieDuration} required = {this.props.required}/>
           <InputActor handleSubmit = {this.newActorRegistered} keyActor = {this.state.key}/>
-          <input type="submit" value="Submit" />
+          <input type="submit" value="Submit" className = "ButtonSubmit" />
         </form>
           <ListActors list = {this.state.actors} deleteActor = {this.deleteActor}/>
       </div>

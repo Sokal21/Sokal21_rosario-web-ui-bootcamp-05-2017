@@ -97,7 +97,7 @@ class MovieUI extends Component {
 
   render() {
     return(
-      <div className="UserUI">
+      <div className = "Container">
         <MovieInput handleNewMovie = {this.handleNewMovie} header = "Enter the movie's information"
         required = {true} state = {{actors: [],key: 0}}/>
         <MovieList movies = {this.state.movies} handleFav = {this.handleFav} handleDelete = {this.handleDelete} handleEdit = {this.handleEdit}/>

@@ -28,12 +28,12 @@ class InputActor extends Component {
   render(){
     return(
       <div className = "MovieActorUI">
-        <p>Enter the actors/actress personal information</p>
+        <p className = "InputActorTitle">Enter the actors/actress personal information</p>
         <InputRowUI title = "Name:" class = "ActorNameUI" type = "text" placeholder = "Actor/Actress name..."
         onInputChange = {this.handleActorName} required = {false}/>
         <InputRowUI title = "Age:" class = "ActorAgeUI" type = "number" placeholder = "Actor/Actress age..."
         onInputChange = {this.handleActorAge}  required = {false}/>
-        <button onClick = {this.newActor}>Add actor</button>
+        <button onClick = {this.newActor} className = "ActorSubmit" >Add actor</button>
       </div>
 
     )
