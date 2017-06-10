@@ -13,8 +13,7 @@ class MovieList extends Component {
           {
             movies.map(function (listValue){
               return (
-                  <MovieElement movie = {listValue} handleFav = {obj.props.handleFav}
-                    handleDelete = {obj.props.handleDelete} handleEdit = {obj.props.handleEdit}/>
+                  <MovieElement movie = {listValue} store = {obj.props.store}/>
                 )
               }
             )

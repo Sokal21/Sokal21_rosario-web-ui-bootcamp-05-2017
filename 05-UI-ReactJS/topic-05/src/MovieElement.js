@@ -24,8 +24,14 @@ class MovieElement extends Component {
     if(!this.state.added){
       event.preventDefault();
       this.setState({added: true});
-      this.props.movie.makeFav();
-      this.props.handleFav();
+      let index = 0;
+      for(index in this.props.store.getState().movies){
+        if(this.props.store.getState().movies[index].key === this.props.movie.key){
+          break;
+        }
+      };
+      let action = {type: 'FAV_MOVIE',index: index};
+      this.props.store.dispatch(action);
     } else {
       alert("this movie already is among your favourites!");
     }
@@ -33,12 +39,28 @@ class MovieElement extends Component {
 
   deleteMovie(event){
     event.preventDefault();
-    this.props.handleDelete(this.props.movie.key);
+    let index = 0;
+    for(index in this.props.store.getState().movies){
+      if(this.props.store.getState().movies[index].key === this.props.movie.key){
+        break;
+      }
+    };
+    let action = {type: 'DELETE_MOVIE',index: index};
+    if(this.props.store.getState().edit.key === this.props.movie.key){
+      let action2 = {type:'EDIT_MOVIE', movie: undefined};
+      this.props.store.dispatch(action2);
+    }
+    this.props.store.dispatch(action);
   }
 
   editMovie(event){
     event.preventDefault();
-    this.props.handleEdit(this.props.movie);
+    if(!this.props.store.getState().edit){
+      let action = {type: 'EDIT_MOVIE',movie: this.props.movie}
+      this.props.store.dispatch(action);
+    } else {
+      alert("You are already editting a movie!");
+    }
   }
 
   viewMovie(event){

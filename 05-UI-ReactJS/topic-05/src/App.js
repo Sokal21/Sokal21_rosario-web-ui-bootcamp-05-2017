@@ -4,8 +4,38 @@ import {Movie} from './Movie.js';
 import MovieInput from './MovieInput.js'
 import MovieList from './MovieList.js'
 import ListElements from './ListElements.js'
+import { createStore } from 'redux'
 
 let movieKey = 0;
+
+function todoApp(state = {movies: [], edit: undefined},action) {
+  switch (action.type) {
+    case 'ADD_MOVIE':
+      let movie = new Movie(action.title, action.year, action.duration, action.key);
+      movie.addCast(action.cast);
+      return Object.assign({},state,{movies: [...state.movies, movie]});
+    case 'DELETE_MOVIE':
+      return Object.assign({},state,{movies: [...state.movies.slice(0,action.index),
+                                              ...state.movies.slice(action.index + 1)]});
+    case 'FAV_MOVIE':
+      let obj = state.movies[action.index];
+      obj.makeFav();
+      return Object.assign({},state,{movies: [...state.movies.slice(0,action.index),
+                                              ...[obj],
+                                              ...state.movies.slice(action.index + 1)]});
+    case 'EDIT_MOVIE':
+      return Object.assign({},state,{edit: action.movie});
+    case 'EDITTED_MOVIE':
+      let obj2 = state.movies[action.index];
+      return Object.assign({},state,{movies: [...state.movies.slice(0,action.index),
+                                              ...[Object.assign({},obj2,action.movieChanges)],
+                                              ...state.movies.slice(action.index + 1)], edit: undefined});
+    default:
+      return state;
+  }
+}
+
+let store = createStore(todoApp);
 
 function getMaxKey(actors){
   let maxKey = 0;
@@ -39,60 +69,38 @@ class MovieEditter extends Component {
 class MovieUI extends Component {
   constructor(props) {
     super(props);
-    this.state = {movies: [], edit: undefined};
+    this.state = store.getState();
     this.handleNewMovie = this.handleNewMovie.bind(this);
-    this.handleFav = this.handleFav.bind(this);
-    this.handleDelete = this.handleDelete.bind(this);
-    this.handleEdit = this.handleEdit.bind(this);
     this.movieEdited = this.movieEdited.bind(this);
-
-
   }
 
   handleNewMovie(title,year,duration,actors){
-    let movie = new Movie(title,year,duration,movieKey);
+    let action = {type: 'ADD_MOVIE',title: title,year: year,duration: duration,cast: actors, key: movieKey};
     movieKey = movieKey + 1;
-    movie.addCast(actors);
-    this.state.movies.push(movie);
-    this.forceUpdate();
-  }
-
-  handleFav(){
-    this.forceUpdate();
-  }
-
-  handleDelete(movieKey){
-    for(let a in this.state.movies){
-      if(this.state.movies[a].key === movieKey){
-        this.state.movies.splice(a,1);
-        break;
-      }
-    }
-    this.forceUpdate();
-  }
-
-  handleEdit(movie){
-    if(!this.state.edit){
-        this.setState({edit: movie});
-    } else {
-      alert("you are already edditing a movie");
-    };
+    store.dispatch(action);
   }
 
   movieEdited(newTitle,newYear,newDuration,newActors){
-    let movie = this.state.edit;
+    let movieChanges = {};
+    let index = 0;
+    for(index in store.getState().movies){
+      if(store.getState().movies[index].key === store.getState().edit.key){
+        break;
+      }
+    };
     if(newTitle){
-      movie.title = newTitle;
+      movieChanges['title'] = newTitle;
     };
     if(newYear){
-      movie.year = newYear;
+      movieChanges['year'] = newYear;
     }
     if(newDuration){
-      movie.duration = newDuration;
+      movieChanges['duration'] = newDuration;
     }
-    movie.cast = newActors;
-    this.setState({edit: undefined});
-    this.forceUpdate();
+    movieChanges['cast'] = newActors;
+    console.log(movieChanges);
+    let action = {type: 'EDITTED_MOVIE',movieChanges: movieChanges,index: index};
+    store.dispatch(action);
   }
 
   render() {
@@ -100,13 +108,13 @@ class MovieUI extends Component {
       <div className = "Container">
         <MovieInput handleNewMovie = {this.handleNewMovie} header = "Enter the movie's information"
         required = {true} state = {{actors: [],key: 0}}/>
-        <MovieList movies = {this.state.movies} handleFav = {this.handleFav} handleDelete = {this.handleDelete} handleEdit = {this.handleEdit}/>
-        <ListElements list = {this.state.movies.filter(function (mv){return mv.favourite})} title = "Your favourites movies!"
+        <MovieList movies = {store.getState().movies} store = {store} />
+        <ListElements list = {store.getState().movies.filter(function (mv){return mv.favourite})} title = "Your favourites movies!"
         class = "FavouritesMovies"/>
-        <MovieEditter movie = {this.state.edit} movieEdited = {this.movieEdited}/>
+        <MovieEditter movie = {store.getState().edit} movieEdited = {this.movieEdited}/>
       </div>
     )
   }
 }
 
-export default MovieUI;
+export default {MovieUI,store};
