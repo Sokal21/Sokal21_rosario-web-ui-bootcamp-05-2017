@@ -1,0 +1,90 @@
+.Container {
+  max-width: 250px;
+  width: 100%;
+  margin: auto;;
+}
+
+.MovieInput {
+  float: left;
+}
+
+.MovieTitleUI, .MovieYearUI, .MovieDurationUI, .ActorNameUI, .ActorYearUI {
+  float: left;
+  margin-bottom: 5px;
+  width: 100%;
+}
+
+.ButtonSubmit {
+  margin: 5px 0px 5px;
+  float: right;
+}
+
+.ActorSubmit {
+  float: left;
+  margin: 5px 0px 5px;
+}
+
+.ActorList {
+  float: left;
+  width: 100%;
+}
+
+.FavouritesMovies {
+  float: left;
+  width: 100%;
+}
+
+.MovieList {
+  float: left;
+  width: 100%;
+}
+
+.MovieEditter {
+  float: left;
+  width: 100%;
+}
+
+.MovieActorUI {
+  float: left;
+  margin: 5px 0px;
+}
+
+.InputActorTitle {
+  background-color: #c9c9c9;
+  border-radius: 5px;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.MovieTitleList {
+  margin: 3px;
+}
+
+.ActorSubmit {
+  margin: 3px;
+  width: 100%;
+  float: left;
+}
+
+.MovieInputTitle {
+  float: left;
+  background-color: #3d5c8e;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.MovieRegiterUI {
+  background-color: #c9c9c9;
+  border-radius: 5px;
+}
+
+input {
+  margin-left: 5px;
+  max-width: 150px;
+  float: right;
+}
+
+button {
+  margin: 2px;
+}
