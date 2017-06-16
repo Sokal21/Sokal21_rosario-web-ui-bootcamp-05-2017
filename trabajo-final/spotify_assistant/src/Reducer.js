@@ -29,6 +29,8 @@ export default function reducer(state = initialState,action) {
       let playlistEditting = state.playlistEditting;
       return Object.assign({},state,{playlistEditting: [...playlistEditting.slice(0,action.index),
                                                         ...playlistEditting.slice(action.index+1)]});
+    case 'CLEAR_SEARCH':
+      return Object.assign({},state,{searchedTracks: []});
     default:
       return state;
   }

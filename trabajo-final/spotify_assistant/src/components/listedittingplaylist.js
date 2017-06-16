@@ -23,8 +23,7 @@ class PickedTrack extends Component {
   render() {
     return(
       <div className = "PickedTrack">
-        <li>{this.props.track.name}</li>
-        <button onClick = {this.deletePickedTrack}>x</button>
+        <li>{this.props.track.name} <button onClick = {this.deletePickedTrack} className = "DeleteTrack">x</button></li>
       </div>
     )
   }
@@ -61,7 +60,7 @@ class ListEdittingPlaylist extends Component {
         </ul>
         <form onSubmit = {this.storePlaylist}>
           <input type = "text" placeholder = "Playlist name..." onChange = {this.handleChange} required/>
-          <input type="submit" value="Add playlist!" className = "ButtonSubmit" />
+          <input type="submit" value="ADD YOUR PLAYLIST!" className = "ButtonSubmit" />
         </form>
       </div>
     )

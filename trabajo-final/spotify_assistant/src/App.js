@@ -11,7 +11,7 @@ class App extends Component {
     return (
       <Provider store = {this.props.store}>
         <Router>
-          <div>
+          <div className="Container">
             <Route exact path="/" component={Login}/>
             <Route path="/callback" component={UIapi} store = {this.store}/>
           </div>

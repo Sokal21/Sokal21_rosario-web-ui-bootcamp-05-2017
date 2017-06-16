@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { refreshSearchedTrack } from '../Actions';
+import { refreshSearchedTrack , clearSearch} from '../Actions';
 
 class Search extends Component {
 
@@ -9,10 +9,16 @@ class Search extends Component {
     this.state = {track: ""};
     this.handleChange = this.handleChange.bind(this);
     this.makeSearch = this.makeSearch.bind(this);
+    this.clearSearch = this.clearSearch.bind(this);
   }
 
   handleChange(event) {
     this.setState({track: event.target.value});
+  }
+
+  clearSearch(event) {
+    event.preventDefault();
+    this.props.clearSearch();
   }
 
   makeSearch(event) {
@@ -26,21 +32,25 @@ class Search extends Component {
                                                                 uri: track.uri
                                                               }
                                                       });
-        let action = refreshSearchedTrack(tracks);
-        obj.props.dispatch(action);
+        obj.props.refreshSearchedTrack(tracks);
       }, function(err) {
       });
   }
 
   render() {
     return(
-      <form className = "Search" onSubmit = {this.makeSearch}>
-        <strong>Search a track!</strong>
+      <form onSubmit = {this.makeSearch} className = "Search">
+        <p>Search a track!</p>
         <input type = "text" placeholder = "Search a track in Spotify" onChange = {this.handleChange} />
-        <input type="submit" value="Search" className = "ButtonSubmit" />
+        <input type = "submit" value = "SEARCH" className = "ButtonSubmit" />
+        <button onClick = {this.clearSearch} className = "ClearButton">CLEAR SEARCH</button>
       </form>
     )
   }
 }
 
-export default connect(state => {return {spotify: state.spotify}})(Search)
+export default connect(state => {return {spotify: state.spotify}},
+                       dispatch => {return {clearSearch: () => dispatch(clearSearch()),
+                                            refreshSearchedTrack: (tracks) => dispatch(refreshSearchedTrack(tracks))
+                                            }
+                                    })(Search)

@@ -26,8 +26,10 @@ class Login extends Component {
 
   render() {
     return (
-      <div className="App">
-        <button onClick={this.login}>LOGIN</button>
+      <div className="Login">
+        <h1 className = "WelcomeTitle">Welcome to Spotify-assistant!</h1>
+        <p>Log in with your Spotify account to start the app.</p>
+        <button onClick={this.login} className="LoginButton">LOGIN</button>
       </div>
     );
   }

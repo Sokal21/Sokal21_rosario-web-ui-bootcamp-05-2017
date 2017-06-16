@@ -44,11 +44,15 @@ class UIapi extends Component {
   render(){
     return(
       <div className = "UserInterface">
-          <h1>Welcome {this.props.user === null ? "" : this.props.user.display_name}</h1>
-          <Search />
-          <ListSearchedTracks />
-          <ListEdittingPlaylist />
-          <LocalPlaylists />
+          <h1 className ="WelcomeTitle">Welcome {this.props.user === null ? "" : this.props.user.display_name}!</h1>
+          <div className = "LeftBlock">
+            <Search />
+            <ListEdittingPlaylist />
+            <LocalPlaylists />
+          </div>
+          <div className = "RightBlock">
+            <ListSearchedTracks />
+          </div>
       </div>
     )
   }

@@ -35,4 +35,8 @@ export function deleteLocalPlaylist(name) {
 export function deletePickedTrack(index) {
   return {type: 'DELETE_PICKED_TRACK',
           index: index};
+};
+
+export function clearSearch() {
+  return {type: 'CLEAR_SEARCH'};
 }

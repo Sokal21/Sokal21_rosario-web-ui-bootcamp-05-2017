@@ -51,8 +51,8 @@ class Track extends Component {
     return (
       <div className = "Track">
         <li>{name.length <=  20 ? name : (name.substring(0,20)+"...")} <strong>by</strong> {artists.length <= 20 ? artists : (artists.substring(0,20)+"...")}</li>
-        <button onClick = {this.showAllInfo}>Info</button>
-        <button onClick = {this.addToLocalPlaylist}>Add to playlists</button>
+        <button onClick = {this.showAllInfo} className = "TrackButton">Info</button>
+        <button onClick = {this.addToLocalPlaylist} className = "TrackButton">ADD TO PLAYLIST</button>
         <TrackInfo name = {name} artists = {this.props.track.artists} show = {info}/>
       </div>
     );

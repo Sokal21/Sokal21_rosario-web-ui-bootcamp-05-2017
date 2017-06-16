@@ -1,24 +1,87 @@
-.App {
+* {
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 2px;
+}
+
+h1 {
+  font-size: 25px;
+}
+
+ul {
+  margin: 5px;
+}
+
+.Login, .UserInterface {
+  margin: 30px;
+}
+
+li {
+  margin-bottom: 5px;
+}
+
+.LeftBlock {
+  float: left;
+  width: 35%;
+}
+
+.RightBlock {
+  float: left;
+  width: 50%;
+}
+
+.WelcomeTitle {
+  font-size: 45px;
+  margin-bottom: 25px;
+}
+
+.LoginButton {
+  font-size: 25px;
+  color: #ffffff;
+  background-color: #25ce76;
+  padding: 13px 28px 13px;
+  border-radius: 30px;
+  border: none;
+  font-weight: bold;
+}
+
+.LoginButton:hover, .ButtonSubmit:hover, .ClearButton:hover, .TrackButton:hover {
+  background-color: #26e280;
+}
+
+.ButtonSubmit, .TrackButton, .ClearButton {
+  color: #ffffff;
+  padding: 5px 15px 5px;
+  background-color: #25ce76;
+  border-radius: 20px;
+  font-weight: bold;
+  border: none;
+  margin: 5px;
+}
+
+.DeleteTrack {
   text-align: center;
+  color: #666666;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 3px 8px 3px;
+  border-radius: 50%;
+  border: none;
+  float: right;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.PickedTrack {
+  margin: 10px 0px 10px;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.DeleteTrack:hover {
+  background-color: #666666;
+  color: #aaaaaa;
 }
 
-.App-intro {
-  font-size: large;
+.Track {
+  margin-bottom: 5px;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.TrackInfo {
+  margin-bottom: 15px;
 }
