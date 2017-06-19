@@ -29,7 +29,7 @@ export function addPlaylistToLocalStorage(playlist) {
 
 export function deleteLocalPlaylist(name) {
   return {type: 'DELETE_LOCAL_PLAYLIST',
-          name: name};
+          index: name};
 };
 
 export function deletePickedTrack(index) {

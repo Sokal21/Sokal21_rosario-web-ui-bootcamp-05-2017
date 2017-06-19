@@ -8,6 +8,7 @@ class ListSearchedTracks extends Component {
     return(
       <div className = "TrackList">
         <h1>Searched tracks</h1>
+        <p>{this.props.searchedTracks.length < 20 ? "":<strong>This search has limited results :(</strong>}</p>
         <ul>
           {
             this.props.searchedTracks.map(function (track){
@@ -17,7 +18,6 @@ class ListSearchedTracks extends Component {
             })
           }
         </ul>
-        {this.props.searchedTracks.length < 20 ? <p></p>:<p><strong>This search has a limited result :(</strong></p>}
       </div>
     )
   }

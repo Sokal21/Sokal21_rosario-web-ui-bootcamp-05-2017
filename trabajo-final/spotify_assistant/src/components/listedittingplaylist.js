@@ -40,7 +40,7 @@ class ListEdittingPlaylist extends Component {
   storePlaylist(event) {
     event.preventDefault();
     let playlist= {name: this.state.playlistName,
-                   tracks: JSON.stringify(this.props.playlistEditting)};
+                   tracks: this.props.playlistEditting};
     this.props.addPlaylistToLocalStorage(playlist);
     this.props.refreshPlaylistEditting();
   }

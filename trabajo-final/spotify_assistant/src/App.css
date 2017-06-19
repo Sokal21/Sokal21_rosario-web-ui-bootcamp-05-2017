@@ -18,15 +18,16 @@ ul {
 li {
   margin-bottom: 5px;
 }
+@media (min-width: 900px){
+  .LeftBlock {
+    float: left;
+    width: 50%;
+  }
 
-.LeftBlock {
-  float: left;
-  width: 35%;
-}
-
-.RightBlock {
-  float: left;
-  width: 50%;
+  .RightBlock {
+    float: left;
+    width: 50%;
+  }
 }
 
 .WelcomeTitle {
@@ -44,11 +45,13 @@ li {
   font-weight: bold;
 }
 
-.LoginButton:hover, .ButtonSubmit:hover, .ClearButton:hover, .TrackButton:hover {
+.LoginButton:hover, .ButtonSubmit:hover, .ClearButton:hover, .TrackButton:hover,
+.LocalPlaylistInfo, .UploadLocalPLaylist:hover, .DeleteLocalPlaylist:hover {
   background-color: #26e280;
 }
 
-.ButtonSubmit, .TrackButton, .ClearButton {
+.ButtonSubmit, .TrackButton, .ClearButton,
+.LocalPlaylistInfo, .UploadLocalPLaylist, .DeleteLocalPlaylist {
   color: #ffffff;
   padding: 5px 15px 5px;
   background-color: #25ce76;
@@ -84,4 +87,8 @@ li {
 
 .TrackInfo {
   margin-bottom: 15px;
+}
+
+.TrackList {
+  margin-top: 50px;
 }

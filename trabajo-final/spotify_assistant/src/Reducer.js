@@ -1,10 +1,11 @@
+import { REHYDRATE } from 'redux-persist/constants'
+
 const initialState = {
   user: null,
   playlistEditting: [],
   spotify: null,
   searchedTracks: [],
-  localStorage: localStorage,
-  change: true
+  localPlaylist: [],
 };
 
 export default function reducer(state = initialState,action) {
@@ -20,17 +21,24 @@ export default function reducer(state = initialState,action) {
     case 'ADD_TRACK_TO_PLAYLIST':
       return Object.assign({},state,{playlistEditting: [...state.playlistEditting, action.track]});
     case 'ADD_PLAYLIST_TO_LOCAL':
-      state.localStorage.setItem(action.playlist.name,action.playlist.tracks);
-      return Object.assign({},state,{localStorage: localStorage, change: !state.change});
+      return Object.assign({},state,{localPlaylist:[...state.localPlaylist,action.playlist]});
     case 'DELETE_LOCAL_PLAYLIST':
-      state.localStorage.removeItem(action.name);
-      return Object.assign({},state,{localStorage: localStorage, change: !state.change});
+      let index = 0;
+      for(index in state.localPlaylist){
+        if(state.localPlaylist[index].name === action.name){
+          break;
+        }
+      }
+      return Object.assign({},state,{localPlaylist: [...state.localPlaylist.slice(0,index),
+                                                     ...state.localPlaylist.slice(index+1)]});
     case 'DELETE_PICKED_TRACK':
       let playlistEditting = state.playlistEditting;
       return Object.assign({},state,{playlistEditting: [...playlistEditting.slice(0,action.index),
                                                         ...playlistEditting.slice(action.index+1)]});
     case 'CLEAR_SEARCH':
       return Object.assign({},state,{searchedTracks: []});
+    case REHYDRATE:
+      return Object.assign({},state,{localPlaylist: action.payload.localPlaylist});
     default:
       return state;
   }

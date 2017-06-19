@@ -58,9 +58,9 @@ class Playlist extends Component {
         <li>
           {this.props.playlist.name}
         </li>
-        <button onClick = {this.showAllInfo}>Info</button>
-        <button onClick = {this.uploadPlaylist}>Upload</button>
-        <button onClick = {this.deletePlaylist}>Delete</button>
+        <button onClick = {this.showAllInfo} className = "LocalPlaylistInfo">Info</button>
+        <button onClick = {this.uploadPlaylist} className = "UploadLocalPLaylist">UPLOAD</button>
+        <button onClick = {this.deletePlaylist} className = "DeleteLocalPlaylist">DELETE</button>
         <PLaylistInfo tracks = {this.props.playlist.tracks} show = {this.state.info}/>
       </div>
     )
@@ -70,13 +70,7 @@ class Playlist extends Component {
 class LocalPlaylists extends Component {
 
   render() {
-    let playlists = [];
-    for(let prop in this.props.localStorage){
-      if(localStorage.hasOwnProperty(prop)){
-        playlists.push({ name: prop,
-                         tracks: JSON.parse(this.props.localStorage.getItem(prop))});
-      }
-    }
+    let playlists = this.props.localPlaylist;
     let obj = this;
     return(
       <div className = "LocalPlaylists">
@@ -92,6 +86,6 @@ class LocalPlaylists extends Component {
 
 export default connect(state => {return {spotify: state.spotify,
                                          user: state.user,
-                                         localStorage: state.localStorage,
+                                         localPlaylist: state.localPlaylist,
                                          change: state.change}},
                       dispatch => {return {deleteLocalPlaylist: (name) => dispatch(deleteLocalPlaylist(name))}})(LocalPlaylists)
