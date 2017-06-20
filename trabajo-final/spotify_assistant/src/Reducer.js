@@ -38,7 +38,11 @@ export default function reducer(state = initialState,action) {
     case 'CLEAR_SEARCH':
       return Object.assign({},state,{searchedTracks: []});
     case REHYDRATE:
-      return Object.assign({},state,{localPlaylist: action.payload.localPlaylist});
+      if (action.payload.localPlaylist) {
+        return Object.assign({},state,{localPlaylist: action.payload.localPlaylist});
+      } else {
+        return state;
+      }
     default:
       return state;
   }

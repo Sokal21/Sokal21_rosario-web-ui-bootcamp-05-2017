@@ -55,8 +55,8 @@ class ListEdittingPlaylist extends Component {
       <div className = "ListEdittingPlaylist">
         <h1>{this.props.playlistEditting.length !== 0?"Your actual Playlist!":"Add tracks to your Playlist!"}</h1>
         <ul className="PlaylistEdittingTracks">
-          {this.props.playlistEditting.map((track) => {return(<PickedTrack track = {track} deletePickedTrack = {obj.props.deletePickedTrack}
-                                                                playlistEditting = {obj.props.playlistEditting}/>)})}
+          {this.props.playlistEditting.map((track, i) => {return(<PickedTrack track = {track} deletePickedTrack = {obj.props.deletePickedTrack}
+                                                                playlistEditting = {obj.props.playlistEditting} key = {i}/>)})}
         </ul>
         <form onSubmit = {this.storePlaylist}>
           <input type = "text" placeholder = "Playlist name..." onChange = {this.handleChange} required/>

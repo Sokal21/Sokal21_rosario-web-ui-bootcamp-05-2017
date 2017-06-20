@@ -11,7 +11,7 @@ class TrackInfo extends Component {
         <div className = "TrackInfo">
           <p><strong>{name}</strong> performed by:</p>
           <ul>
-            {artists.map((artist) => {return(<li>{artist}</li>)})}
+            {artists.map((artist,i) => {return(<li key = {i}>{artist}</li>)})}
           </ul>
         </div>
       )

@@ -9,7 +9,7 @@ class PLaylistInfo extends Component {
         <div className = "PlaylistInfo">
           <p><strong>tracks:</strong></p>
           <ul>
-            {this.props.tracks.map((track) => {return(<li>{track.name}</li>)})}
+            {this.props.tracks.map((track,i) => {return(<li key = {i}>{track.name}</li>)})}
           </ul>
         </div>
       )
@@ -76,7 +76,7 @@ class LocalPlaylists extends Component {
       <div className = "LocalPlaylists">
         <h1>This are your localy stored Playlists!</h1>
         <ul>
-          {playlists.map(playlist => {return(<Playlist playlist = {playlist}
+          {playlists.map((playlist,i) => {return(<Playlist playlist = {playlist} key = {i}
                                               spotify = {obj.props.spotify} user = {obj.props.user} deleteLocalPlaylist = {this.props.deleteLocalPlaylist}/>)})}
         </ul>
       </div>

@@ -72,11 +72,22 @@ li {
   float: right;
 }
 
+.PageButton {
+  text-align: center;
+  color: #666666;
+  font-weight: bold;
+  font-size: 15px;
+  padding: 3px 8px 3px;
+  border-radius: 50%;
+  border: none;
+  margin-right: 5px;
+}
+
 .PickedTrack {
   margin: 10px 0px 10px;
 }
 
-.DeleteTrack:hover {
+.DeleteTrack:hover, .PageButton:hover {
   background-color: #666666;
   color: #aaaaaa;
 }

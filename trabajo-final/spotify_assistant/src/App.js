@@ -13,7 +13,7 @@ class App extends Component {
         <Router>
           <div className="Container">
             <Route exact path="/" component={Login}/>
-            <Route path="/callback" component={UIapi} store = {this.store}/>
+            <Route path="/callback" component={UIapi}/>
           </div>
         </Router>
       </Provider>
