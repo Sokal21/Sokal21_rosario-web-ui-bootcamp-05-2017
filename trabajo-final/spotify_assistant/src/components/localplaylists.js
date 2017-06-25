@@ -30,8 +30,9 @@ class Playlist extends Component {
   }
 
   deletePlaylist(event) {
+    console.log(this.props);
     event.preventDefault();
-    this.props.deleteLocalPlaylist(this.props.playlist.name)
+    this.props.deleteLocalPlaylist(this.props.index)
   }
 
   uploadPlaylist(event) {
@@ -76,7 +77,7 @@ class LocalPlaylists extends Component {
       <div className = "LocalPlaylists">
         <h1>This are your localy stored Playlists!</h1>
         <ul>
-          {playlists.map((playlist,i) => {return(<Playlist playlist = {playlist} key = {i}
+          {playlists.map((playlist,i) => {return(<Playlist playlist = {playlist} key = {i} index = {i}
                                               spotify = {obj.props.spotify} user = {obj.props.user} deleteLocalPlaylist = {this.props.deleteLocalPlaylist}/>)})}
         </ul>
       </div>

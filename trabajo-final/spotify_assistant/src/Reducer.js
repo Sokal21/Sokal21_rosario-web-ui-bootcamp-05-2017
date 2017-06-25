@@ -23,12 +23,8 @@ export default function reducer(state = initialState,action) {
     case 'ADD_PLAYLIST_TO_LOCAL':
       return Object.assign({},state,{localPlaylist:[...state.localPlaylist,action.playlist]});
     case 'DELETE_LOCAL_PLAYLIST':
-      let index = 0;
-      for(index in state.localPlaylist){
-        if(state.localPlaylist[index].name === action.name){
-          break;
-        }
-      }
+      let index = action.index;
+      console.log(index);
       return Object.assign({},state,{localPlaylist: [...state.localPlaylist.slice(0,index),
                                                      ...state.localPlaylist.slice(index+1)]});
     case 'DELETE_PICKED_TRACK':

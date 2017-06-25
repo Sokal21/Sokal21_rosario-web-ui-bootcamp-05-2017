@@ -10,20 +10,14 @@ class PickedTrack extends Component {
 
   deletePickedTrack(event){
     event.preventDefault();
-    let playlistEditting = this.props.playlistEditting;
-    let index = 0;
-    for(let index in playlistEditting){
-      if(playlistEditting[index].id === this.props.track.id){
-        break;
-      }
-    };
-    this.props.deletePickedTrack(index);
+    this.props.deletePickedTrack(this.props.index);
   }
 
   render() {
+    let name = this.props.track.name;
     return(
       <div className = "PickedTrack">
-        <li>{this.props.track.name} <button onClick = {this.deletePickedTrack} className = "DeleteTrack">x</button></li>
+        <li>{name.length <20 ?name:(name.substring(0,20)+"...")} <button onClick = {this.deletePickedTrack} className = "DeleteTrack">x</button></li>
       </div>
     )
   }
@@ -56,7 +50,7 @@ class ListEdittingPlaylist extends Component {
         <h1>{this.props.playlistEditting.length !== 0?"Your actual Playlist!":"Add tracks to your Playlist!"}</h1>
         <ul className="PlaylistEdittingTracks">
           {this.props.playlistEditting.map((track, i) => {return(<PickedTrack track = {track} deletePickedTrack = {obj.props.deletePickedTrack}
-                                                                playlistEditting = {obj.props.playlistEditting} key = {i}/>)})}
+                                                                playlistEditting = {obj.props.playlistEditting} key = {i} index = {i}/>)})}
         </ul>
         <form onSubmit = {this.storePlaylist}>
           <input type = "text" placeholder = "Playlist name..." onChange = {this.handleChange} required/>
@@ -70,5 +64,5 @@ class ListEdittingPlaylist extends Component {
 export default connect(state => {return {playlistEditting: state.playlistEditting}},
                        dispatch => {return {refreshPlaylistEditting: () => dispatch(refreshPlaylistEditting()),
                                             addPlaylistToLocalStorage: (playlist) => dispatch(addPlaylistToLocalStorage(playlist)),
-                                            deletePickedTrack: (trackId) => dispatch(deletePickedTrack(trackId))}
+                                            deletePickedTrack: (index) => dispatch(deletePickedTrack(index))}
                                    })(ListEdittingPlaylist)
