@@ -18,7 +18,8 @@ ul {
 li {
   margin-bottom: 5px;
 }
-@media (min-width: 900px){
+
+@media (min-width: 934px){
   .LeftBlock {
     float: left;
     width: 50%;
@@ -27,6 +28,17 @@ li {
   .RightBlock {
     float: left;
     width: 50%;
+  }
+
+  .DeleteTrack {
+    margin-right: 40%;
+  }
+
+}
+
+@media (max-width: 468px) {
+  .ButtonSubmit, .ClearButton {
+    margin: 20px;
   }
 }
 
@@ -70,7 +82,6 @@ li {
   border-radius: 50%;
   border: none;
   float: right;
-  margin-right: 55%;
 }
 
 .PageButton {
