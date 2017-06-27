@@ -34,6 +34,7 @@ class UIapi extends Component {
         let action = addUserData(data);
         obj.props.dispatch(action);
       }, function(err) {
+        console.log(err);
       });
   }
 
@@ -44,7 +45,7 @@ class UIapi extends Component {
   render(){
     return(
       <div className = "UserInterface">
-          <h1 className ="WelcomeTitle">Welcome {this.props.user === null ? "" : this.props.user.display_name}!</h1>
+          <h1 className ="WelcomeTitle">Welcome {!this.props.user?this.props.user.display_name:""}!</h1>
           <div className = "LeftBlock">
             <Search />
             <ListEdittingPlaylist />

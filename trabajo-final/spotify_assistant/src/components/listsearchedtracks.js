@@ -40,7 +40,7 @@ class ListSearchedTracks extends Component {
 
   render() {
     let page = this.state.page + 1;
-    let pageToRender = (this.state.pages.length === 0?[]:this.state.pages[this.state.page]);
+    let pageToRender = (this.state.pages.length !== 0?this.state.pages[this.state.page]:[]);
     return(
       <div className = "TrackList">
         <h1>Searched tracks</h1>

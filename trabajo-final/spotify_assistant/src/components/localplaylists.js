@@ -45,6 +45,7 @@ class Playlist extends Component {
       .then(function(data) {
         spotify.addTracksToPlaylist(userId,data.id,tracks)
       }, function(err) {
+        console.log(err);
       });
   }
 
